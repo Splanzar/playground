@@ -44,53 +44,57 @@ int main ()
          endVal     /*second ctor parameter*/, 
          alloc_inst /*third ctor parameter*/); 
    std::chrono::microseconds start_micro = std::chrono::duration_cast< std::chrono::microseconds >(std::chrono::system_clock::now().time_since_epoch());
+   //const int TEST_SIZE = INT_MAX/1024 - 10000;
+   const int TEST_SIZE = 10000;
+   std::cout << "size of vector:: "<< TEST_SIZE << std::endl;
    if (myvector->size() <= sizeof(initVal)/sizeof(initVal[0]))
    {
-   for(int i = 0; i < INT_MAX/1024 - 10000; ++i)
+   for(int i = 0; i < TEST_SIZE; ++i)
    {
        myvector->push_back('a' + i%26);
    }
    }
    std::chrono::microseconds end_micro = std::chrono::duration_cast< std::chrono::microseconds >(std::chrono::system_clock::now().time_since_epoch());
-   std::cout << "push first: "<< myvector->size() << " " << end_micro.count() - start_micro.count() << std::endl;
+   std::cout << "push first(micros): "<< myvector->size() << " " << end_micro.count() - start_micro.count() << std::endl;
    std::vector<char> stdvector;
 
    start_micro = std::chrono::duration_cast< std::chrono::microseconds >(std::chrono::system_clock::now().time_since_epoch());
-   for(int i = 0; i < INT_MAX/1024 - 10000; ++i)
+   for(int i = 0; i < TEST_SIZE; ++i)
    {
        stdvector.push_back('a' + i%26);
    }
    end_micro = std::chrono::duration_cast< std::chrono::microseconds >(std::chrono::system_clock::now().time_since_epoch());
-   std::cout << "push second: "<< stdvector.size() << " " << end_micro.count() - start_micro.count() << std::endl;
+   std::cout << "push second(micros): "<< stdvector.size() << " " << end_micro.count() - start_micro.count() << std::endl;
    start_micro = std::chrono::duration_cast< std::chrono::microseconds >(std::chrono::system_clock::now().time_since_epoch());
-   for(int i = 0; i < INT_MAX/1024 - 10000; ++i)
+   for(int i = 0; i < TEST_SIZE; ++i)
    {
         (*myvector)[i] += 1;
    }
    end_micro = std::chrono::duration_cast< std::chrono::microseconds >(std::chrono::system_clock::now().time_since_epoch());
-   std::cout << "write first: "<< myvector->size() << " " << end_micro.count() - start_micro.count() << std::endl;
-   int kk;
+   std::cout << "write first(micros): "<< myvector->size() << " " << end_micro.count() - start_micro.count() << std::endl;
    start_micro = std::chrono::duration_cast< std::chrono::microseconds >(std::chrono::system_clock::now().time_since_epoch());
-   for(int i = 0; i < INT_MAX/1024 - 10000; ++i)
+   for(int i = 0; i < TEST_SIZE; ++i)
    {
        stdvector[i] += 1;
    }
    end_micro = std::chrono::duration_cast< std::chrono::microseconds >(std::chrono::system_clock::now().time_since_epoch());
-   std::cout << "write second: "<< stdvector.size() << " " << end_micro.count() - start_micro.count() << std::endl;
+   std::cout << "write second(micros): "<< stdvector.size() << " " << end_micro.count() - start_micro.count() << std::endl;
    std::chrono::nanoseconds start_nano = std::chrono::duration_cast< std::chrono::nanoseconds >(std::chrono::system_clock::now().time_since_epoch());
-   for(int i = 0; i < INT_MAX/1024 - 10000; ++i)
+   int kk;
+   for(int i = 0; i < TEST_SIZE; ++i)
    {
         kk = (*myvector)[i];
    }
    std::chrono::nanoseconds end_nano = std::chrono::duration_cast< std::chrono::nanoseconds >(std::chrono::system_clock::now().time_since_epoch());
-   std::cout << "acceess first: "<< myvector->size() << " " << end_nano.count() - start_nano.count() << std::endl;
+   std::cout << "acceess first(nanos): "<< myvector->size() << " " << end_nano.count() - start_nano.count() << std::endl;
    start_nano = std::chrono::duration_cast< std::chrono::nanoseconds >(std::chrono::system_clock::now().time_since_epoch());
-   for(int i = 0; i < INT_MAX/1024 - 10000; ++i)
+   for(int i = 0; i < TEST_SIZE; ++i)
    {
        kk = stdvector[i];
    }
    end_nano = std::chrono::duration_cast< std::chrono::nanoseconds >(std::chrono::system_clock::now().time_since_epoch());
-   std::cout << "access second: "<< stdvector.size() << " " << end_nano.count() - start_nano.count() << std::endl;
+   std::cout << "access second(nanos): "<< stdvector.size() << " " << end_nano.count() - start_nano.count() << std::endl;
+   std::cout << kk;
 
 
 /*
