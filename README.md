@@ -1,3 +1,7 @@
+Basically, first is a normal std::vector, and second is a memory mapped vector. We first push into both the same amount of data, then change every element of both, then read every data. 
+
+The current approach is syncing with file constantly. will try less sync approaches in the future   
+
 Current output  
 
 size of vector:: 10000  
